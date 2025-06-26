@@ -11,13 +11,13 @@ export default function MainBlogCard({
 }: MainBlogCardProps) {
   return (
     <div className="">
-      <article className="w-full relative mb-4">
+      <article className="w-full relative mb-4 text-[#181A2A]">
         <Image
           src={blogimg}
           alt="Sort"
           className="w-full h-[480px] object-cover rounded-lg"
         />
-        <figure className="absolute bg-white dark:bg-[#181A2A] w-[50%] h-[50%] rounded-2xl bottom-[-60px] left-12">
+        <figure className="absolute bg-white dark:bg-[#a6a9b9] w-[50%] h-[50%] rounded-2xl bottom-[-60px] left-12 shadow-xl">
           <div className="w-[18%] h-[12%] bg-[#4B6BFB] rounded-lg flex items-center justify-center absolute top-6 left-8">
             <h3 className="text-white">Technology</h3>
           </div>
