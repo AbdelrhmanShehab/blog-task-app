@@ -22,16 +22,26 @@ interface ThemeProviderProps {
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [togglemode, setToggleMode] = useState(false);
 
+  // On load: get from localStorage and apply to <html>
   useEffect(() => {
     const storedMode = localStorage.getItem("darkMode");
     const isDark = storedMode === "true";
     setToggleMode(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, []);
 
+  // On state change: update localStorage and apply class
   useEffect(() => {
     localStorage.setItem("darkMode", togglemode.toString());
-    document.documentElement.classList.toggle("dark", togglemode);
+    if (togglemode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, [togglemode]);
 
   return (
