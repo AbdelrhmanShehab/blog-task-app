@@ -2,29 +2,33 @@ import React from "react";
 import Image from "next/image";
 import blogimg from "../../public/assets/images/profile-pic.jpg";
 interface MainBlogCardProps {
-  blogtitle: string;
-  blogbody: string;
+  mainBlogTitle: string;
+  mainBlogBody: string;
 }
 export default function MainBlogCard({
-  blogtitle,
-  blogbody,
+  mainBlogTitle,
+  mainBlogBody,
 }: MainBlogCardProps) {
   return (
     <div className="">
       <article className="w-full relative mb-4 text-[#181A2A]">
         <Image
-          src={blogimg}
-          alt="Sort"
+          src="https://picsum.photos/seed/1000/800/600"
+          alt="Better quality"
+          width={800}
+          height={600}
           className="w-full h-[480px] object-cover rounded-lg"
         />
-        <figure className="absolute bg-white dark:bg-[#a6a9b9] w-[50%] h-[50%] rounded-2xl bottom-[-60px] left-12 shadow-xl">
-          <div className="w-[18%] h-[12%] bg-[#4B6BFB] rounded-lg flex items-center justify-center absolute top-6 left-8">
+        <figure className="absolute bg-white dark:bg-[#181A2A] dark:text-white w-[80%] md:w-[50%] h-[50%] rounded-2xl bottom-[-60px] left-6 md:left-6 shadow-xl ">
+          <div className="p-1 bg-[#4B6BFB] rounded-lg flex items-center justify-center absolute top-6 left-6 md:left-6">
             <h3 className="text-white">Technology</h3>
           </div>
           <figcaption className="flex flex-col items-center justify-center h-full ">
             <div className="flex flex-col items-center justify-cenpxter pt-10 w-[86%] h-[80%] gap-4">
-              <h1 className="text-2xl leading-6 font-semibold">{blogtitle}</h1>
-              <p className="leading-6">{blogbody}</p>
+              <h1 className="text-2xl leading-6 font-semibold">
+                {mainBlogTitle}
+              </h1>
+              <p className="leading-6">{mainBlogBody}</p>
             </div>
           </figcaption>
         </figure>

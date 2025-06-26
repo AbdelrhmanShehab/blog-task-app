@@ -1,7 +1,6 @@
 import { Post } from "@/types/post";
-import BlogCard from "@/components/BlogCard";
-import BlogCardProps from "@/components/MainBlogCard";
 import MainBlogCard from "@/components/MainBlogCard";
+import BlogCard from "@/components/BlogCard";
 export default async function PostsPage() {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   if (!res.ok) throw new Error("Failed to fetch posts");
@@ -9,8 +8,19 @@ export default async function PostsPage() {
 
   return (
     <main className="container">
-      <h1 className="text-3xl font-bold mb-4">All Blog Posts</h1>
-      <MainBlogCard blogtitle={posts[0].title} blogbody={posts[0].body.slice(1,600)} />
+      <div className="mt-8">
+        <MainBlogCard
+          mainBlogTitle={posts[0].title}
+          mainBlogBody={posts[0].body.slice(1, 600)}
+        />
+        <div className="mt-26">
+          <BlogCard
+            blogTitle={posts[1].title}
+            blogCategory="action"
+            blogImage="https://picsum.photos/seed/42/800/600"
+          />
+        </div>
+      </div>
     </main>
   );
 }

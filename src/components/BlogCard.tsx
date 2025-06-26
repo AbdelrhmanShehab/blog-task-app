@@ -1,15 +1,39 @@
-import React from "react";
+"use client";
+
+import Image from "next/image";
 
 interface BlogCardProps {
-  title: string;
-  author: string;
-  date: string;
-  excerpt: string;
-  onClick?: () => void;
+  blogImage: string;
+  blogCategory: string;
+  blogTitle: string;
 }
 
-export default function BlogCard() {
-  return (<article>
-    
-  </article>);
+export default function BlogCard({
+  blogImage,
+  blogCategory,
+  blogTitle,
+}: BlogCardProps) {
+  return (
+    <div className="bg-white dark:bg-[#181A2A] rounded-xl shadow-sm overflow-hidden border p-4 max-w-sm transition hover:shadow-lg">
+      <div className="relative w-full h-48 rounded-md overflow-hidden">
+        <Image
+          src={blogImage}
+          alt="Blog image"
+          fill
+          className="object-cover"
+          sizes="100%"
+        />
+      </div>
+
+      {/* Category */}
+      <span className="text-xs font-semibold text-[#4B6BFB] bg-blue-100 dark:bg-blue-900 dark:text-blue-300 px-3 py-2 rounded-full inline-block mt-4">
+        {blogCategory}
+      </span>
+
+      {/* Title */}
+      <h2 className="text-lg font-bold text-[#181A2A] dark:text-white mt-2 leading-snug">
+        {blogTitle}
+      </h2>
+    </div>
+  );
 }

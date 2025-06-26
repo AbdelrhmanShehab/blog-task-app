@@ -8,7 +8,7 @@ export default function Header() {
   const { togglemode, setToggleMode } = useTheme();
 
   return (
-    <header className="bg-white dark:bg-[#181A2A] text-black dark:text-white py-4 shadow-md ">
+    <header className="bg-white dark:bg-[#131421] text-black dark:text-white py-4 shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-2xl font-bold">Blog App</h1>
         <nav className="flex gap-4">

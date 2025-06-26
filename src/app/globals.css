@@ -7,14 +7,11 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme inlin94{
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-geist-m94o);
 }
-
-@media (prefers-color-scheme: dark) {
+@media (prefers-K-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -28,4 +25,19 @@ body {
   padding-left: 20px;
   padding-right: 20px;
   width: 68%;
+}
+@media (max-width: 900px) {
+  .container {
+    width: 80%;
+  }
+}
+@media (max-width: 750px) {
+  .container {
+    width: 86%;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    width: 94%;
+  }
 }
