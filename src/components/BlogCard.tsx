@@ -9,5 +9,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard() {
-  return <></>;
+  return (<article>
+    
+  </article>);
 }
