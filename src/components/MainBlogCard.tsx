@@ -10,7 +10,7 @@ export default function MainBlogCard({
   mainBlogBody,
 }: MainBlogCardProps) {
   return (
-    <div className="">
+    <div className="mt-8">
       <article className="w-full relative mb-4 text-[#181A2A]">
         <Image
           src="https://picsum.photos/seed/1000/800/600"
@@ -20,8 +20,8 @@ export default function MainBlogCard({
           className="w-full h-[480px] object-cover rounded-lg"
         />
         <figure className="absolute bg-white dark:bg-[#181A2A] dark:text-white w-[80%] md:w-[50%] h-[50%] rounded-2xl bottom-[-60px] left-6 md:left-6 shadow-xl ">
-          <div className="p-1 bg-[#4B6BFB] rounded-lg flex items-center justify-center absolute top-6 left-6 md:left-6">
-            <h3 className="text-white">Technology</h3>
+          <div className="p-1 text-xs font-semibold text-[#4B6BFB] bg-blue-100 dark:bg-blue-900 dark:text-blue-300 rounded-lg flex items-center justify-center absolute top-6 left-6 md:left-6">
+            <h3>Technology</h3>
           </div>
           <figcaption className="flex flex-col items-center justify-center h-full ">
             <div className="flex flex-col items-center justify-cenpxter pt-10 w-[86%] h-[80%] gap-4">

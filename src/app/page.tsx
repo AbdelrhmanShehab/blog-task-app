@@ -5,21 +5,31 @@ export default async function PostsPage() {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   if (!res.ok) throw new Error("Failed to fetch posts");
   const posts: Post[] = await res.json();
-
+  let categories = [
+    "Technology",
+    "Health",
+    "Lifestyle",
+    "Travel",
+    "Food",
+    "Education",
+  ];
   return (
     <main className="container">
-      <div className="mt-8">
-        <MainBlogCard
-          mainBlogTitle={posts[0].title}
-          mainBlogBody={posts[0].body.slice(1, 600)}
-        />
-        <div className="mt-26">
+      <MainBlogCard
+        mainBlogTitle={posts[0].title}
+        mainBlogBody={posts[0].body.slice(1, 600)}
+      />
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 w-full mt-26">
+        {posts.map((post) => (
           <BlogCard
-            blogTitle={posts[1].title}
-            blogCategory="action"
-            blogImage="https://picsum.photos/seed/42/800/600"
+            key={post.id}
+            blogTitle={post.title}
+            blogCategory={
+              categories[Math.floor(Math.random() * categories.length)]
+            }
+            blogImage={`https://picsum.photos/seed/${post.id}/800/600`}
           />
-        </div>
+        ))}
       </div>
     </main>
   );
