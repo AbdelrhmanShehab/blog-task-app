@@ -14,8 +14,8 @@ export default function BlogCard({
   blogTitle,
 }: BlogCardProps) {
   return (
-    <div className="bg-white dark:bg-[#181A2A] rounded-xl shadow-sm overflow-hidden border p-4 max-w-sm transition hover:shadow-lg">
-      <div className="relative w-full h-48 rounded-md overflow-hidden">
+    <article className="bg-white cursor-pointer dark:bg-[#181A2A] rounded-xl shadow-sm overflow-hidden border p-4 max-w-sm transition hover:shadow-lg hover:scale-105">
+      <div className="relative w-full h-48 rounded-md overflow-hidden hover:scale-105 transition-transform">
         <Image
           src={blogImage}
           alt="Blog image"
@@ -34,6 +34,6 @@ export default function BlogCard({
       <h2 className="text-lg font-bold text-[#181A2A] dark:text-white mt-2 leading-snug">
         {blogTitle}
       </h2>
-    </div>
+    </article>
   );
 }

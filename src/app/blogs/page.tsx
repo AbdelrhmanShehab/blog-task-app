@@ -17,7 +17,7 @@ export default async function Blogs() {
       <h1 className="flex justify-center items-center my-12 text-2xl">
         All Blogs
       </h1>
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 w-full mb-14">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 w-full mb-14">
         {posts.map((post) => (
           <BlogCard
             key={post.id}

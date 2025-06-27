@@ -8,9 +8,11 @@ export default function Header() {
   const { togglemode, setToggleMode } = useTheme();
 
   return (
-    <header className="bg-white dark:bg-[#131421] text-black dark:text-white py-4 shadow-md ">
+    <header className="bg-white fixed w-full top-0 z-5 dark:bg-[#131421] text-black dark:text-white py-4 shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Blog App</h1>
+        <h1 className="text-2xl font-bold transition-all duration-500 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:drop-shadow-[0_0_15px_rgba(192,132,252,0.8)]">
+          Abdelrhman Shihab
+        </h1>
         <nav className="flex gap-4">
           <div className="flex items-center gap-12">
             <button

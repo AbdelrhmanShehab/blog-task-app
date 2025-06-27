@@ -10,8 +10,8 @@ export default function MainBlogCard({
   mainBlogBody,
 }: MainBlogCardProps) {
   return (
-    <div className="mt-8">
-      <article className="w-full relative mb-4 text-[#181A2A]">
+    <div className="mt-24">
+      <article className="w-full relative mb-4 text-[#181A2A] cursor-pointer dark:text-white hover:text-[#4B6BFB]  hover:scale-105">
         <Image
           src="https://picsum.photos/seed/1000/800/600"
           alt="Better quality"
