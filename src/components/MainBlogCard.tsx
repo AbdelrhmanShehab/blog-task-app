@@ -19,7 +19,7 @@ export default function MainBlogCard({
           height={600}
           className="w-full h-[480px] object-cover rounded-lg"
         />
-        <figure className="absolute bg-white dark:bg-[#181A2A] dark:text-white w-[80%] md:w-[50%] h-[50%] rounded-2xl bottom-[-60px] left-6 md:left-6 shadow-xl ">
+        <figure className="absolute bg-white dark:bg-[#181A2A] dark:text-white w-[80%] md:w-[50%] h-[85%] md:h-[70%] lg:h-[60%] rounded-2xl bottom-[-60px] left-6 md:left-6 shadow-xl ">
           <div className="p-1 text-xs font-semibold text-[#4B6BFB] bg-blue-100 dark:bg-blue-900 dark:text-blue-300 rounded-lg flex items-center justify-center absolute top-6 left-6 md:left-6">
             <h3>Technology</h3>
           </div>

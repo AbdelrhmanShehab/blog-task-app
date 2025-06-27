@@ -26,18 +26,23 @@ body {
   padding-right: 20px;
   width: 68%;
 }
+@media (max-width: 1300px) {
+  .container {
+    width: 76%;
+  }
+}
 @media (max-width: 900px) {
   .container {
-    width: 80%;
+    width: 88%;
   }
 }
 @media (max-width: 750px) {
   .container {
-    width: 86%;
+    width: 94%;
   }
 }
 @media (max-width: 600px) {
   .container {
-    width: 94%;
+    width: 98%;
   }
 }
