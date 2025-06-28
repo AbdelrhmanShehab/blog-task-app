@@ -45,11 +45,11 @@ export default async function PostsPage() {
             </Link>
           ))}
         </div>
+        <button className="text-white absolute translate-x-[-50%] left-[50%] flex justify-center items-center rounded-2xl text-lg w-[164px] mb-16 h-[56px] cursor-pointer text-center bg-blue-800 hover:bg-blue-700 transition-all duration-300 ease-in-out">
+          <a href="/blogs">See All Blogs</a>
+        </button>
+        <div className="h-10"></div>
       </main>
-
-      <button className="text-white absolute translate-x-[-50%] left-[50%] flex justify-center items-center rounded-2xl text-lg w-[164px] h-[56px] cursor-pointer text-center bg-blue-800 hover:bg-blue-700 transition-all duration-300 ease-in-out">
-        <a href="/blogs">See All Blogs</a>
-      </button>
     </>
   );
 }

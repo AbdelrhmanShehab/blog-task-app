@@ -13,7 +13,7 @@ export default function Header() {
         <h1 className="md:text-xl  font-bold transition-all duration-500 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:drop-shadow-[0_0_15px_rgba(192,132,252,0.8)]">
           Abdelrhman Shihab
         </h1>{" "}
-        <nav className="flex gap-12">
+        <nav className="flex gap-11">
           <button
             onClick={() => setToggleMode(!togglemode)}
             className="w-6 h-6 relative focus:outline-none  "
@@ -30,7 +30,7 @@ export default function Header() {
               />
             </div>
           </button>{" "}
-          <ul className="flex space-x-4">
+          <ul className="flex space-x-3">
             <li>
               <a href="/" className="hover:underline">
                 Home

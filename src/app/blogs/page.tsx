@@ -5,13 +5,19 @@ import { Post } from "@/types/post";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Pagination from "@/components/Pagination";
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 export default function Blogs() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8);
+  const [postsPerPage] = useState(12);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-  let categories = [
+  const categories = [
     "Technology",
     "Health",
     "Lifestyle",
@@ -20,49 +26,114 @@ export default function Blogs() {
     "Education",
   ];
 
+  // Fetch posts once
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        setLoading(true);
+        setError(null);
+
         const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+
         if (!res.ok) throw new Error("Failed to fetch posts");
+
         const data: Post[] = await res.json();
         setPosts(data);
-      } catch (err) {
-        console.error(err);
+      } catch (err: any) {
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchPosts();
   }, []);
 
+  // Reset to page 1 on filters
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesSearch = post.title
+      .toLowerCase()
+      .startsWith(searchQuery.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" ||
+      post.id % categories.length === categories.indexOf(selectedCategory); // pseudo-category matching
+
+    return matchesSearch && matchesCategory;
+  });
+
   const lastPost = currentPage * postsPerPage;
   const firstPost = lastPost - postsPerPage;
-  const currentPosts = posts.slice(firstPost, lastPost);
+  const currentPosts = filteredPosts.slice(firstPost, lastPost);
 
   return (
     <main className="container">
-      <h1 className="flex justify-center items-center mb-12 text-2xl">
-        All Blogs
-      </h1>
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <Error />
+      ) : (
+        <>
+          <h1 className="flex justify-center items-center mb-12 text-2xl">
+            All Blogs
+          </h1>
 
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full mb-14">
-        {currentPosts.map((post) => (
-          <Link key={post.id} href={`/blogs/${post.id}`} className="min-h-[300px]">
-            <BlogCard
-              blogTitle={post.title}
-              blogCategory={categories[Math.floor(Math.random() * categories.length)]}
-              blogImage={`https://picsum.photos/seed/${post.id}/800/600`}
+          <div className="w-full flex justify-center items-center">
+            <input
+              className="w-[260px] mb-6 pl-3 h-12 border dark:border-white border-[#181A2A]  rounded-lg focus:outline-none focus:ring-1 focus:[#181A2A]"
+              type="text"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search blogs..."
             />
-          </Link>
-        ))}
-      </div>
+          </div>
 
-      <Pagination
-        totalPosts={posts.length}
-        postsPerPage={postsPerPage}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
-      <div className="h-12" />
+          {/* Category filter buttons */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {["All", ...categories].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-full text-sm border cursor-pointer transition-all ${
+                  selectedCategory === cat
+                    ? "bg-white text-black dark:bg-white dark:text-black"
+                    : "bg-transparent text-white border-white hover:bg-white hover:text-black dark:border-white"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full mb-14">
+            {currentPosts.map((post) => (
+              <Link
+                key={post.id}
+                href={`/blogs/${post.id}`}
+                className="min-h-[300px]"
+              >
+                <BlogCard
+                  blogTitle={post.title}
+                  blogCategory={
+                    categories[Math.floor(post.id % categories.length)]
+                  }
+                  blogImage={`https://picsum.photos/seed/${post.id}/800/600`}
+                />
+              </Link>
+            ))}
+          </div>
+
+          <Pagination
+            totalPosts={filteredPosts.length}
+            postsPerPage={postsPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+          <div className="h-12" />
+        </>
+      )}
     </main>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 interface BlogCardProps {
   blogImage: string;
@@ -13,8 +14,12 @@ export default function BlogCard({
   blogCategory,
   blogTitle,
 }: BlogCardProps) {
+  const BlogCard = dynamic(() => import("@/components/BlogCard"), {
+    loading: () => <div className="h-60 bg-gray-100 animate-pulse rounded" />, // Placeholder
+    ssr: false, // optional, if the component is client-only
+  });
   return (
-    <article className="bg-white cursor-pointer w-full dark:bg-[#181A2A] h-full rounded-2xl shadow-2xl overflow-hidden  border-b-blue-950 p-4 transition hover:shadow-lg hover:scale-105">
+    <article className="bg-white cursor-pointer w-full dark:bg-[#181A2A] h-full rounded-2xl shadow-xl overflow-hidden  border-b-blue-950 p-4 transition hover:shadow-lg hover:scale-105">
       <div className="relative w-full h-48 rounded-lg overflow-hidden hover:scale-105 transition-transform min-h-48">
         <Image
           src={blogImage}
