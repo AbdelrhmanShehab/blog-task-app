@@ -2,38 +2,18 @@
 @tailwind utilities;
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inlin94{
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-m94o);
-}
-@media (prefers-K-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
 }
 .container {
   margin: auto;
   padding-left: 20px;
   padding-right: 20px;
-  width: 68%;
+  width: 76%;
+  min-width: "950px";
 }
 @media (max-width: 1300px) {
   .container {
-    width: 76%;
-  }
-}
-@media (max-width: 900px) {
-  .container {
-    width: 88%;
+    width: 94%;
   }
 }
 @media (max-width: 750px) {
@@ -46,3 +26,4 @@ body {
     width: 98%;
   }
 }
+

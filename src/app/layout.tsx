@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={
-          "bg-white text-black dark:bg-[#181A2A] dark:text-white transition-colors duration-300"
+          "bg-white text-[#181A2A] dark:bg-[#181A2A] dark:text-white transition-colors duration-300"
         }
       >
         <ThemeProvider>
