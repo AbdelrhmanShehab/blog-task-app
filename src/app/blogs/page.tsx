@@ -97,8 +97,8 @@ export default function Blogs() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-full text-sm border cursor-pointer transition-all ${
                   selectedCategory === cat
-                    ? "bg-white text-black dark:bg-white dark:text-black"
-                    : "bg-transparent text-white border-white hover:bg-white hover:text-black dark:border-white"
+                    ? "bg-[#181A2A] text-white dark:bg-white dark:text-[#181A2A]"
+                    : "bg-transparent text-[#181A2A] dark:text-white border-[#181A2A] hover:bg-white hover:text-[#181A2A] dark:border-white"
                 }`}
               >
                 {cat}
