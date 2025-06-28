@@ -1,22 +1,12 @@
-
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { type Metadata } from "next";
+import type { Metadata } from "next";
 
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-interface BlogDetailsProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function BlogDetails({ params }: BlogDetailsProps) {
+export default async function BlogDetails({
+  params,
+}: {
+  params: { id: string };
+}) {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.id}`,
     {
@@ -26,7 +16,12 @@ export default async function BlogDetails({ params }: BlogDetailsProps) {
 
   if (!res.ok) return notFound();
 
-  const post: Post = await res.json();
+  const post: {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+  } = await res.json();
 
   return (
     <main className="container">
