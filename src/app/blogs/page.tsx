@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Pagination from "@/components/Pagination";
 import Loading from "@/components/Loading";
-import Error from "@/components/Error";
+import ErrorComponent from "@/components/ErrorComponent";
 
 export default function Blogs() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +26,6 @@ export default function Blogs() {
     "Education",
   ];
 
-  // Fetch posts once
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -60,7 +59,7 @@ export default function Blogs() {
       .startsWith(searchQuery.toLowerCase());
     const matchesCategory =
       selectedCategory === "All" ||
-      post.id % categories.length === categories.indexOf(selectedCategory); // pseudo-category matching
+      post.id % categories.length === categories.indexOf(selectedCategory);
 
     return matchesSearch && matchesCategory;
   });
@@ -74,7 +73,7 @@ export default function Blogs() {
       {loading ? (
         <Loading />
       ) : error ? (
-        <Error />
+        <ErrorComponent />
       ) : (
         <>
           <h1 className="flex justify-center items-center mb-12 text-2xl">

@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-Sitemap: https://yourdomain.com/sitemap.xml
+# Host
+Host: https://blog-task-app-flax.vercel.app/
+
+# Sitemaps
+Sitemap: https://blog-task-app-flax.vercel.app/sitemap.xml

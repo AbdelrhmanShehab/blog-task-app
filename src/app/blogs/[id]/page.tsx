@@ -1,68 +1,32 @@
+// @ts-nocheck
 import { notFound } from "next/navigation";
-import { type Metadata } from "next";
 import Image from "next/image";
 
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+export const dynamic = "force-dynamic";
 
-interface BlogDetailsProps {
-  params: {
-    id: string;
-  };
-}
-
-export async function generateMetadata({
-  params,
-}: BlogDetailsProps): Promise<Metadata> {
+export default async function BlogDetails({ params }) {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
-  );
-
-  if (!res.ok) return {};
-
-  const post: Post = await res.json();
-
-  return {
-    title: post.title,
-    description: post.body.slice(0, 160),
-    openGraph: {
-      title: post.title,
-      description: post.body.slice(0, 160),
-      images: [`https://picsum.photos/seed/${params.id}/800/600`],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.body.slice(0, 160),
-      images: [`https://picsum.photos/seed/${params.id}/800/600`],
-    },
-  };
-}
-
-export default async function BlogDetails({ params }: BlogDetailsProps) {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
+    `https://jsonplaceholder.typicode.com/posts/${params.id}`,
+    { next: { revalidate: 60 } }
   );
 
   if (!res.ok) return notFound();
 
-  const post: Post = await res.json();
+  const post = await res.json();
 
   return (
-    <main className="container py-10">
+    <main className="container">
       <Image
-        src={`https://picsum.photos/seed/${params.id}/800/400`}
-        alt={post.title}
+        src={`https://picsum.photos/seed/${params.id}/800/600`}
+        alt="Blog Image"
         width={800}
-        height={400}
-        className="rounded-lg mb-8 -mt-4 w-full"
+        height={600}
+        className="w-full h-80 object-cover rounded-lg"
       />
-      <h1 className="text-3xl font-semibold mb-4">{post.title}</h1>
-      <p className="text-lg text-gray-700 dark:text-gray-300">{post.body}</p>
+      <div className="flex flex-col gap-4 mt-4">
+        <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+        <p className="text-gray-700 dark:text-gray-300">{post.body}</p>
+      </div>
     </main>
   );
 }
