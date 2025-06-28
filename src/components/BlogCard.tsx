@@ -14,7 +14,7 @@ export default function BlogCard({
   blogTitle,
 }: BlogCardProps) {
   return (
-    <article className="bg-white cursor-pointer w-full dark:bg-[#181A2A] h-full rounded-2xl shadow-xl overflow-hidden  border-b-blue-950 p-4 transition hover:shadow-lg hover:scale-105">
+    <article className="bg-white cursor-pointer w-full dark:bg-[#181A2A] h-full rounded-2xl shadow-2xl overflow-hidden  border-b-blue-950 p-4 transition hover:shadow-lg hover:scale-105">
       <div className="relative w-full h-48 rounded-lg overflow-hidden hover:scale-105 transition-transform min-h-48">
         <Image
           src={blogImage}

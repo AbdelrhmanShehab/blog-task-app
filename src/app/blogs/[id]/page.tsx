@@ -1,4 +1,3 @@
-
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
@@ -17,7 +16,10 @@ interface PageProps {
 
 export default async function BlogDetails({ params }: PageProps) {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
+    `https://jsonplaceholder.typicode.com/posts/${params.id}`,
+    {
+      next: { revalidate: 60 }, // optional caching
+    }
   );
 
   if (!res.ok) return notFound();
@@ -31,7 +33,7 @@ export default async function BlogDetails({ params }: PageProps) {
         alt="Blog Image"
         width={800}
         height={600}
-        className="w-full h-80 object-cover rounded-lg "
+        className="w-full h-80 object-cover rounded-lg"
       />
       <div className="flex flex-col gap-4 mt-4">
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
