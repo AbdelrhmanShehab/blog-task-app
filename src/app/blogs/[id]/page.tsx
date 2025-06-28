@@ -1,14 +1,21 @@
+
 import { notFound } from "next/navigation";
 import Image from "next/image";
+
 interface Post {
   userId: number;
   id: number;
   title: string;
   body: string;
-  params: { id: string };
 }
 
-export default async function BlogDetails({ params }: Post) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function BlogDetails({ params }: PageProps) {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.id}`
   );
