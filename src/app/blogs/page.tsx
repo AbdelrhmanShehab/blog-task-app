@@ -121,6 +121,7 @@ export default function Blogs() {
                   blogImage={`https://picsum.photos/seed/${post.id}/800/600`}
                 />
               </Link>
+              
             ))}
           </div>
 

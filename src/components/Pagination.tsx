@@ -65,7 +65,13 @@ const Pagination: React.FC<PaginationProps> = ({
         className="flex justify-center items-center px-4 py-2 text-sm font-medium gap-3 cursor-pointer"
       >
         NEXT
-        <Image width={20} height={20} src={right} alt="next icon" className="dark:invert" />
+        <Image
+          width={20}
+          height={20}
+          src={right}
+          alt="next icon"
+          className="dark:invert"
+        />
       </button>
     </div>
   );
