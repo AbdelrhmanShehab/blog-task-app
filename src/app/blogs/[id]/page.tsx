@@ -1,5 +1,7 @@
+
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { type Metadata } from "next";
 
 interface Post {
   userId: number;
@@ -8,17 +10,17 @@ interface Post {
   body: string;
 }
 
-interface PageProps {
+interface BlogDetailsProps {
   params: {
     id: string;
   };
 }
 
-export default async function BlogDetails({ params }: PageProps) {
+export default async function BlogDetails({ params }: BlogDetailsProps) {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.id}`,
     {
-      next: { revalidate: 60 }, // optional caching
+      next: { revalidate: 60 },
     }
   );
 
