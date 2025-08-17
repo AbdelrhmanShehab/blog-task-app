@@ -1,30 +1,29 @@
-"use client";
-
 import { Post } from "@/app/[locale]/types/post";
 import MainBlogCard from "@/app/[locale]/components/MainBlogCard";
 import BlogCard from "@/app/[locale]/components/BlogCard";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { getTranslations } from "next-intl/server";
+import { hasLocale } from "next-intl";
+import { routing } from "../../i18n/routing";
+import { notFound } from "next/navigation";
 
-export default function PostsPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const t = useTranslations("Home-Page");
-
-  // Fetch posts on mount
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-        if (!res.ok) throw new Error("Failed to fetch posts");
-        const data: Post[] = await res.json();
-        setPosts(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchPosts();
-  }, []);
+export default async function PostsPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const locale = params.locale;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  const t = await getTranslations("Home-Page");
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    notFound();
+  }
+  const posts: Post[] = await res.json();
 
   // Categories translated using t()
   const categories = [
