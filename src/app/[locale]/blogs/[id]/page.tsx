@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import BlogCard from "@/components/BlogCard";
+import BlogCard from "@/app/[locale]/components/BlogCard";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
 

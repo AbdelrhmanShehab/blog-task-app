@@ -1,0 +1,30 @@
+{
+  "Home-Page": {
+    "welcome": "Welcome to our blog!",
+    "description": "We would like you to know that our app supports multi languages and dark theme for a good experience",
+    "perefernce": "Choose your preferences",
+    "Recent-blogs": "Recent Blogs",
+    "see-all-button": "See All Blogs",
+    "Lifestyle": "Lifestyle",
+    "Technology": "Technology",
+    "Health": "Health",
+    "Education": "Education",
+    "Travel": "Travel",
+    "Food": "Food",
+    "All": "All"
+  },
+  "Loaging": {
+    "loading": "We're loading your data, please wait...",
+    "loading-error": "An error occurred while loading your data, please try again later."
+  },
+  "Blogs-page": {
+    "all-blogs": "All blogs",
+    "category": "Category",
+    "search-placeholder": "Search for a blog",
+    "no-blogs-found": "No blogs found",
+
+    "Blogs": "Blogs",
+    "next": "Next",
+    "previous": "Previous"
+  }
+}

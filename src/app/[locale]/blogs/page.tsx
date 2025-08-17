@@ -1,12 +1,12 @@
 "use client";
 
-import BlogCard from "@/components/BlogCard";
-import { Post } from "@/types/post";
+import BlogCard from "@/app/[locale]/components/BlogCard";
+import { Post } from "@/app/[locale]/types/post";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Pagination from "@/components/Pagination";
-import Loading from "@/components/Loading";
-import ErrorComponent from "@/components/ErrorComponent";
+import Pagination from "@/app/[locale]/components/Pagination";
+import Loading from "@/app/[locale]/components/Loading";
+import ErrorComponent from "@/app/[locale]/components/ErrorComponent";
 
 export default function Blogs() {
   const [currentPage, setCurrentPage] = useState(1);

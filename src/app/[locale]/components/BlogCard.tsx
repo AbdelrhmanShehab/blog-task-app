@@ -14,7 +14,7 @@ export default function BlogCard({
   blogCategory,
   blogTitle,
 }: BlogCardProps) {
-  const BlogCard = dynamic(() => import("@/components/BlogCard"), {
+  const BlogCard = dynamic(() => import("@/app/[locale]/components/BlogCard"), {
     loading: () => <div className="h-60 bg-gray-100 animate-pulse rounded" />,
     ssr: false,
   });

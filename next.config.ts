@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
+const withNextIntl = require("next-intl/plugin")();
 
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "picsum.photos",
+        port: "",
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -13,7 +17,6 @@ const nextConfig = {
       },
     ],
   },
-
   async headers() {
     return [
       {
@@ -30,7 +33,9 @@ const nextConfig = {
               connect-src 'self' https://jsonplaceholder.typicode.com;
               object-src 'none';
               frame-src 'none';
-            `.replace(/\s{2,}/g, " ").trim(),
+            `
+              .replace(/\s{2,}/g, " ")
+              .trim(),
           },
           {
             key: "X-Content-Type-Options",
@@ -50,4 +55,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = withNextIntl(nextConfig);
