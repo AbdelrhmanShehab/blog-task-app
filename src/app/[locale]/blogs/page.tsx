@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 import Pagination from "@/app/[locale]/components/Pagination";
 import Loading from "@/app/[locale]/components/Loading";
 import ErrorComponent from "@/app/[locale]/components/ErrorComponent";
-
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { Locale } from "next-intl";
 export default function Blogs() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
@@ -16,14 +18,16 @@ export default function Blogs() {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const t = useTranslations("blogs");
 
+  // Categories from translations
   const categories = [
-    "Technology",
-    "Health",
-    "Lifestyle",
-    "Travel",
-    "Food",
-    "Education",
+    t("Technology"),
+    t("Health"),
+    t("Lifestyle"),
+    t("Travel"),
+    t("Food"),
+    t("Education"),
   ];
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export default function Blogs() {
       .toLowerCase()
       .startsWith(searchQuery.toLowerCase());
     const matchesCategory =
-      selectedCategory === "All" ||
+      selectedCategory === t("All") ||
       post.id % categories.length === categories.indexOf(selectedCategory);
 
     return matchesSearch && matchesCategory;
@@ -67,6 +71,7 @@ export default function Blogs() {
   const lastPost = currentPage * postsPerPage;
   const firstPost = lastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(firstPost, lastPost);
+  const locale = useLocale();
 
   return (
     <main className="container">
@@ -77,7 +82,7 @@ export default function Blogs() {
       ) : (
         <>
           <h1 className="flex justify-center items-center mb-12 text-2xl">
-            All Blogs
+            {t("all-blogs")}
           </h1>
 
           <div className="w-full flex justify-center items-center">
@@ -85,21 +90,20 @@ export default function Blogs() {
               className="w-[260px] mb-6 pl-3 h-12 border dark:border-white border-[#181A2A]  rounded-lg focus:outline-none focus:ring-1 focus:[#181A2A]"
               type="text"
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search blogs..."
+              placeholder={t("search-placeholder")}
             />
           </div>
 
           {/* Category filter buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {["All", ...categories].map((cat) => (
+            {[t("All"), ...categories].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm border cursor-pointer transition-all ${
-                  selectedCategory === cat
-                    ? "bg-[#181A2A] text-white dark:bg-white dark:text-[#181A2A]"
-                    : "bg-transparent text-[#181A2A] dark:text-white border-[#181A2A] hover:bg-white hover:text-[#181A2A] dark:border-white"
-                }`}
+                className={`px-4 py-2 rounded-full text-sm border cursor-pointer transition-all ${selectedCategory === cat
+                  ? "bg-[#181A2A] text-white dark:bg-white dark:text-[#181A2A]"
+                  : "bg-transparent text-[#181A2A] dark:text-white border-[#181A2A] hover:bg-white hover:text-[#181A2A] dark:border-white"
+                  }`}
               >
                 {cat}
               </button>
@@ -110,7 +114,7 @@ export default function Blogs() {
             {currentPosts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blogs/${post.id}`}
+                href={`/${locale}/blogs/${post.id}`}
                 className="min-h-[300px]"
               >
                 <BlogCard
@@ -121,7 +125,6 @@ export default function Blogs() {
                   blogImage={`https://picsum.photos/seed/${post.id}/800/600`}
                 />
               </Link>
-              
             ))}
           </div>
 

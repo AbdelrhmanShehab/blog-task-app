@@ -14,17 +14,30 @@
     "Education": "التعليم",
     "All": "الكل"
   },
+  "header": {
+    "home": "الرئيسية",
+    "blogs": "المقالات",
+    "Abdelrhman Shihab": "عبد الرحمن شهاب"
+  },
   "Loaging": {
     "loading": "جارى تحميل البيانات... استنى ثواني ",
     "loading-error": "حصل خطأ أثناء تحميل البيانات، جرّب تاني بعد شوية "
   },
-  "Blogs-page": {
+  "blogs": {
     "all-blogs": "كل المقالات",
     "category": "التصنيف",
     "search-placeholder": "دور على مقالة...",
     "no-blogs-found": "مفيش مقالات دلوقتي",
     "Blogs": "المقالات",
     "next": "التالي",
-    "previous": "السابق"
+    "previous": "السابق",
+    "Technology": "التكنولوجيا",
+    "Health": "الصحة",
+    "Lifestyle": "أسلوب الحياة",
+    "Travel": "السفر",
+    "Food": "الطعام",
+    "Education": "التعليم",
+    "All": "الكل",
+    "RelatedPosts": "المقالات المشابهه"
   }
 }

@@ -1,6 +1,7 @@
 "use client";
-import right from "../../public/assets/icons/right-icon.svg";
+import right from "../../../../public/assets/icons/right-icon.svg";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 interface PaginationProps {
   totalPosts: number;
   postsPerPage: number;
@@ -23,7 +24,8 @@ const Pagination: React.FC<PaginationProps> = ({
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pages.push(i);
   }
-
+  const t = useTranslations("blogs");
+  
   return (
     <div className="flex flex-wrap justify-between mt-8 gap-2">
       <button
@@ -39,18 +41,17 @@ const Pagination: React.FC<PaginationProps> = ({
           alt="next icon"
           className="rotate-180 dark:invert"
         />
-        PREV
+        {t("previous")}
       </button>
       <div>
         {pages.map((page) => (
           <button
             key={page}
             onClick={() => handlePageClick(page)}
-            className={`px-4 py-2 mr-2 text-sm font-medium border rounded-md transition duration-200 cursor-pointer ${
-              page === currentPage
-                ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100 dark:bg-[#1e1e2f] dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
-            }`}
+            className={`px-4 py-2 mr-2 text-sm font-medium border rounded-md transition duration-200 cursor-pointer ${page === currentPage
+              ? "bg-blue-600 text-white border-blue-600"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100 dark:bg-[#1e1e2f] dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
+              }`}
           >
             {page}
           </button>
@@ -64,7 +65,7 @@ const Pagination: React.FC<PaginationProps> = ({
         }
         className="flex justify-center items-center px-4 py-2 text-sm font-medium gap-3 cursor-pointer"
       >
-        NEXT
+        {t("next")}
         <Image
           width={20}
           height={20}

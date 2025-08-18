@@ -8,6 +8,7 @@ import {
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import { getMessages } from 'next-intl/server';
+import { ReactNode } from "react";
 
 import './globals.css';
 import Header from '@/app/[locale]/components/Header';
@@ -55,15 +56,14 @@ export const metadata: Metadata = {
   }
 };
 
-export default async function LocaleLayout({
+export default async function RootLayout({
   children,
-  params
+  params,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: { locale: string };
 }) {
-  const locale = params.locale;
-
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }

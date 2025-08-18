@@ -3,13 +3,16 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import BlogCard from "@/app/[locale]/components/BlogCard";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
 export const dynamic = "force-dynamic";
 
 export default async function BlogDetails({ params }) {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`,
-    { next: { revalidate: 60 } }
-  );
+  const { locale, id } = params;
+
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    next: { revalidate: 60 },
+  });
 
   if (!res.ok) return notFound();
 
@@ -17,7 +20,7 @@ export default async function BlogDetails({ params }) {
 
   const allPostsRes = await fetch("https://jsonplaceholder.typicode.com/posts");
   const allPosts = await allPostsRes.json();
-  const otherPosts = allPosts.filter((p) => p.id !== Number(params.id));
+  const otherPosts = allPosts.filter((p) => p.id !== Number(id));
   const shuffled = otherPosts.sort(() => 0.5 - Math.random());
   const relatedPosts = shuffled.slice(0, 3);
 
@@ -30,28 +33,37 @@ export default async function BlogDetails({ params }) {
     "Education",
   ];
 
+  const tBlogs = await getTranslations({ locale, namespace: "blogs" });
+
   return (
     <main className="container">
+      {/* Category */}
       <span className="text-xs -mt-4 font-semibold text-[#4B6BFB] mb-6 bg-blue-100 dark:bg-blue-900 dark:text-blue-300 px-4 py-3 rounded-full inline-block">
-        Life Style
+        {tBlogs("Lifestyle")}
       </span>
+
+      {/* Post Image */}
       <Image
-        src={`https://picsum.photos/seed/${params.id}/800/600`}
+        src={`https://picsum.photos/seed/${id}/800/600`}
         alt="Blog Image"
         width={800}
         height={600}
         className="w-full h-110 object-cover rounded-lg"
       />
+
+      {/* Post Content */}
       <div className="flex flex-col gap-4 mt-4">
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
         <p className="text-gray-700 dark:text-gray-300">{post.body}</p>
       </div>
-      <h2 className="mt-30 mb-6 font-bold text-2xl">Related posts</h2>
+
+      {/* Related Posts */}
+      <h2 className="mt-30 mb-6 font-bold text-2xl">{tBlogs("RelatedPosts")}</h2>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full mb-20">
         {relatedPosts.map((post) => (
           <Link
             key={post.id}
-            href={`/blogs/${post.id}`}
+            href={`/${locale}/blogs/${post.id}`}
             className="min-h-[300px]"
           >
             <BlogCard
